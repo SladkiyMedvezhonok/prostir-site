@@ -1,0 +1,45 @@
+<script>
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const topic = document.getElementById('topic').value;
+
+    const message = `🧠 НОВИЙ ЗАПИС\n\n👤 Ім’я: ${name}\n📞 Телефон: ${phone}\n📝 Проблема/Фахівець: ${topic}`;
+
+    const telegramResponse = await fetch(`https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: '<YOUR_CHAT_ID>',
+        text: message
+      })
+    });
+
+    if (telegramResponse.ok) {
+      alert('Форма відправлена! Ми зв’яжемось з вами.');
+      event.target.reset();
+    } else {
+      alert('Сталася помилка при відправленні.');
+    }
+  }
+</script>
+
+<section id="form" style="display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 40px 20px;">
+  <h2>Записатися на консультацію</h2>
+  <form onsubmit="handleFormSubmit(event)" style="max-width: 500px; width: 100%;">
+    <label for="name">Ваше ім’я</label><br>
+    <input type="text" id="name" name="name" required style="width:100%;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;"><br>
+
+    <label for="phone">Телефон</label><br>
+    <input type="tel" id="phone" name="phone" required style="width:100%;padding:10px;margin-bottom:15px;border-radius:8px;border:1px solid #ccc;"><br>
+
+    <label for="topic">Фахівець або коротко про проблему</label><br>
+    <textarea id="topic" name="topic" rows="4" style="width:100%;padding:10px;margin-bottom:20px;border-radius:8px;border:1px solid #ccc;"></textarea><br>
+
+    <button type="submit" style="padding:10px 20px;border:none;border-radius:8px;background:#333;color:#fff;cursor:pointer;">Відправити</button>
+  </form>
+  <p style="text-align:center; margin-top: 15px;">
+    Або напишіть нам напряму в <a href="https://t.me/Bsmedical098" target="_blank">Telegram</a>
+  </p>
+</section>

@@ -1,0 +1,95 @@
+<style>
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin: 60px 0 20px;
+}
+
+#specialists {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.specialists-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.specialist-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease;
+}
+
+.specialist-card:hover {
+  transform: translateY(-5px);
+}
+
+.specialist-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ccc;
+  margin: 0 auto 15px;
+}
+
+.specialist-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.specialist-role {
+  font-size: 0.95rem;
+  color: #555;
+}
+</style>
+
+<section id="specialists">
+  <h2>Наші фахівці</h2>
+  <div class="specialists-wrapper">
+    <div class="specialist-card">
+      <div class="specialist-image"></div>
+      <div class="specialist-name">Катерина Скурат</div>
+      <div class="specialist-role">Гештальт-терапевт, психолог</div>
+    </div>
+    <div class="specialist-card">
+      <div class="specialist-image"></div>
+      <div class="specialist-name">Сніжана Девіс</div>
+      <div class="specialist-role">Психоаналітик, психотерапевт</div>
+    </div>
+    <div class="specialist-card">
+      <div class="specialist-image"></div>
+      <div class="specialist-name">Валентина Чайка</div>
+      <div class="specialist-role">Психолог для дітей, підлітків, пар</div>
+    </div>
+    <div class="specialist-card">
+      <div class="specialist-image"></div>
+      <div class="specialist-name">Олеся Горелікова</div>
+      <div class="specialist-role">Психотерапевт, психосоматолог</div>
+    </div>
+    <div class="specialist-card">
+      <div class="specialist-image"></div>
+      <div class="specialist-name">Ірина Макарова</div>
+      <div class="specialist-role">Психіатр, психотерапевт</div>
+    </div>
+    <div class="specialist-card">
+      <div class="specialist-image"></div>
+      <div class="specialist-name">Юрій Ковальчук</div>
+      <div class="specialist-role">Гештальт-терапевт, психосоматолог</div>
+    </div>
+  </div>
+</section>
