@@ -1,0 +1,22 @@
+---
+// Компонент для плитки статті в блозі
+const { title, description, url } = Astro.props;
+
+// Обмеження символів для опису
+const trimmedDescription = description.length > 100 ? description.slice(0, 100) + "..." : description;
+---
+
+<article>
+  <a href={url} class="service-style-card">
+    <h2>{title}</h2>
+    <p>{trimmedDescription}</p>
+    <div class="read-more-overlay">Читати статтю</div>
+  </a>
+</article>
+
+<style>
+  /* Компонент успадковує стилі зі сторінки */
+  .service-style-card {
+    min-height: 180px;
+  }
+</style>

@@ -1,72 +1,77 @@
 <style>
-  .nav-bar {
+  /* Основні стилі навігації */
+  nav {
     width: 100%;
-    padding: 16px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: linear-gradient(90deg, #f7ebe8, #e3f1f1);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
   }
 
-  .nav-logo {
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #333;
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
   }
 
-  .nav-links {
+  .menu {
     display: flex;
+    gap: 1rem;
   }
 
-  .nav-links a {
-    margin-left: 24px;
+  .menu a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
-    transition: all 0.3s ease;
+    position: relative;
+    transition: color 0.3s;
   }
 
-  .nav-links a:hover {
-    color: #000;
-    text-decoration: underline;
+  .menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    transition: width 0.3s;
+  }
+
+  .menu a:hover::after {
+    width: 100%; /* Плавне підкреслення при наведенні */
   }
 
   .burger {
     display: none;
     flex-direction: column;
+    gap: 5px;
     cursor: pointer;
-    gap: 4px;
-    z-index: 1100;
   }
 
   .burger span {
-    height: 3px;
     width: 25px;
+    height: 3px;
     background: #333;
     border-radius: 2px;
   }
 
   @media (max-width: 768px) {
-    .nav-links {
+    .menu {
       display: none;
       flex-direction: column;
-      background: #fff;
-      width: 100%;
-      padding: 20px;
       position: absolute;
       top: 60px;
-      left: 0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      animation: fadeIn 0.3s ease-in-out;
+      right: 20px;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    .nav-links.active {
+    .menu.open {
       display: flex;
     }
 
@@ -74,43 +79,50 @@
       display: flex;
     }
   }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const links = document.querySelectorAll('.nav-links a');
-    const menu = document.querySelector('.nav-links');
-    const burger = document.querySelector('.burger');
+  // Вмикає/вимикає клас "open" для мобільного меню
+  let isOpen = false;
+  function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    isOpen = !isOpen;
+    menu.classList.toggle('open', isOpen);
+  }
 
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('active');
+  // Закриває меню при кліку на будь-яке посилання (мобільна версія)
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".menu a").forEach((link) => {
+      link.addEventListener("click", () => {
+        const menu = document.querySelector(".menu");
+        menu.classList.remove("open");
+        isOpen = false;
       });
-    });
-
-    burger.addEventListener('click', () => {
-      menu.classList.toggle('active');
     });
   });
 </script>
 
-<nav class="nav-bar">
-  <div class="nav-logo">Простір</div>
-  <div class="burger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div class="nav-links">
-    <a href="#about">Про нас</a>
-    <a href="#services">Послуги</a>
-    <a href="#specialists">Фахівці</a>
-    <a href="#form">Запис</a>
-    <a href="#contact">Контакти</a>
-  </div>
-</nav>
+<!-- 📌 Липка навігація з розмиттям фону -->
+<header style="position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(12px); background-color: rgba(255, 255, 255, 0.9);">
+  <nav>
+    <!-- 🔷 Логотип або назва сайту -->
+    <div class="logo">Простір</div>
+
+    <!-- 🔷 Меню навігації (з повними шляхами для роботи з будь-якої сторінки) -->
+    <div class="menu">
+      <a href="/#about">Про нас</a>
+      <a href="/#services">Послуги</a>
+      <a href="/#specialists">Фахівці</a>
+      <a href="/#form">Запис</a>
+      <a href="/#contact">Контакт</a>
+      <a href="/blog">Блог</a>
+    </div>
+
+    <!-- 🔷 Бургер-меню для мобільних пристроїв -->
+    <div class="burger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+</header>
